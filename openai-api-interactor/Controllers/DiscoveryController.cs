@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OpenAI.Chat;
 
 namespace openai_api_interactor.Controllers
 {
@@ -9,6 +11,7 @@ namespace openai_api_interactor.Controllers
     {
 
         private readonly string _apiKey;
+        private readonly ChatClient _chatClient;
 
         // why is the argument of type IConfiguration instead of just Configuration?
         // cuz it's an interface.
@@ -26,6 +29,8 @@ namespace openai_api_interactor.Controllers
             // what is this syntax on configuration?  is configuration just an object, with API_KEY as a key?
             // yes, configuration is a collection of config settings
             _apiKey = configuration["API_KEY"] ?? throw new ArgumentNullException(nameof(_apiKey), "API Key not found in configuration.");
+
+            _chatClient = new(model: "gpt-4o-mini", _apiKey);
         }
 
         // this is a c# attribute
@@ -35,9 +40,13 @@ namespace openai_api_interactor.Controllers
 
         // object is a type that all types inherit from.
         // it's analogous to any.
-        public object Get()
+        async public Task<object> Get()
         {
-            var testObj = new { test = "test", apiKey = _apiKey };
+            ChatCompletion completion = await _chatClient.CompleteChatAsync("You are a tsundere assistant.  Tell me some fun facts about medieval Europe.");
+
+            string content = completion.Content.First().ToString();
+
+            var testObj = new { test = "test", content };
             return testObj;
         }
     }
