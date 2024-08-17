@@ -37,12 +37,10 @@ namespace openai_api_interactor.Controllers
         // config can be passed through a funny looking parens syntax
         // it does not get invoked as a function, though.
         [HttpGet]
-
-        // object is a type that all types inherit from.
-        // it's analogous to any.
+        // TODO return IActionResult and an Ok() 
         async public Task<object> Get()
         {
-            ChatCompletion completion = await _chatClient.CompleteChatAsync("You are a tsundere assistant.  Tell me some fun facts about medieval Europe.");
+            ChatCompletion completion = await _chatClient.CompleteChatAsync("You are a tsundere assistant.  Tell me some fun facts about the history of Japan, from post-war period to the modern era.");
 
             string content = completion.Content.First().ToString();
 
