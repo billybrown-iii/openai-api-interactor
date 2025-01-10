@@ -77,9 +77,18 @@ namespace openai_api_interactor.Controllers
 
             ChatCompletion completion = await _chatClient.CompleteChatAsync(prompt);
 
+            // TODO validate the shape
+
             // later:  look into structured outputs
 
             string content = completion.ToString();
+
+            // should the Discovery controller return a Discovery instance?  Should there be a Discovery model?
+            // or a Recommendations model?
+            // What's the real C# developer way to go here?
+
+            // Is the controller like my application services layer?
+            // so it orchestrates services like RecommendationsFactory.
 
             var testObj = new { test = "test", content };
             return testObj;
