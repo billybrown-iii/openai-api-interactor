@@ -2,9 +2,9 @@
 {
     public enum MediaType
     {
-        Books,
-        Films,
-        Shows,
-        Games
+        Book,
+        Film,
+        Show,
+        Game
     }
 }
