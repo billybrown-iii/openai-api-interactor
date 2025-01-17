@@ -1,4 +1,5 @@
 using openai_api_interactor.Enums;
+using openai_api_interactor.Services;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,8 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader() 
         .AllowAnyMethod());
 });
+
+builder.Services.AddTransient<PromptBuilder>();
 
 var app = builder.Build();
 
