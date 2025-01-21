@@ -39,7 +39,10 @@ namespace openai_api_interactor.Controllers
 
             string prompt = _promptBuilder.FromTasteProfile(tasteProfile, selectedMediaType);
 
-            ChatCompletion completion = await _chatClient.CompleteChatAsync(prompt);
+            ChatMessage myMessage = new SystemChatMessage(prompt);
+            ChatCompletion completion = await _chatClient.CompleteChatAsync([myMessage]);
+
+            //ChatCompletion completion = await _chatClient.CompleteChatAsync(prompt);
 
             // TODO validate the chat completion's contents
 
