@@ -1,14 +1,17 @@
 ﻿using openai_api_interactor.Enums;
+using openai_api_interactor.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace openai_api_interactor.DTOs
 {
-    public class DiscoveryRequest(TasteProfile tasteProfile, MediaType selectedMediaType)
+    public class DiscoveryRequest(IDiscoverySettings tasteProfile, MediaType selectedMediaType)
     {
         [Required]
-        public TasteProfile TasteProfile { get; init; } = tasteProfile;
+        public IDiscoverySettings TasteProfile { get; init; } = tasteProfile;
 
         [Required]
         public MediaType SelectedMediaType { get; init; } = selectedMediaType;
+        [Required]
+        public 
     }
 }

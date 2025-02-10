@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OpenAI.Chat;
 using openai_api_interactor.DTOs;
+using openai_api_interactor.Models;
 using openai_api_interactor.Services;
 using System.Text.Json;
 
@@ -34,7 +35,7 @@ namespace openai_api_interactor.Controllers
             Console.WriteLine(JsonSerializer.Serialize(discoveryRequest));
 
             // todo validate the request
-            TasteProfile tasteProfile = discoveryRequest.TasteProfile;
+            IDiscoverySettings tasteProfile = discoveryRequest.TasteProfile;
             string selectedMediaType = discoveryRequest.SelectedMediaType.ToString().ToLower();  // ex: book
 
             string prompt = _promptBuilder.FromTasteProfile(tasteProfile, selectedMediaType);

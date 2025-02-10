@@ -1,8 +1,10 @@
-﻿namespace openai_api_interactor.Services
+﻿using openai_api_interactor.Models;
+
+namespace openai_api_interactor.Services
 {
     public class PromptBuilder
     {
-        public string FromTasteProfile (TasteProfile tasteProfile, string selectedMediaType)
+        public string FromTasteProfile (IDiscoverySettings tasteProfile, string selectedMediaType)
         {
 
             // Consider using this type of prompt:
