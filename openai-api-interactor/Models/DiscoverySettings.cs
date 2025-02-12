@@ -2,12 +2,11 @@
 
 namespace openai_api_interactor.Models
 {
-    public class DiscoverySettings
+    // can I make these values all immutable?
+    public class DiscoverySettings (string mediaType, string genre, string qualities)
     {
-        //public List<string> Books { get; set; } = [];
-
-        public MediaType SelectedMediaType { get; set; }
-        public string Genre { get; set; }
-        public string Qualities { get; set; }
+        public string MediaType { get; set; } = mediaType;
+        public string? Genre { get; set; } = genre;
+        public string? Qualities { get; set; } = qualities;
     }
 }

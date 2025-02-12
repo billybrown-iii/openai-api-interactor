@@ -4,14 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace openai_api_interactor.DTOs
 {
-    public class DiscoveryRequest(IDiscoverySettings tasteProfile, MediaType selectedMediaType)
+    public class DiscoveryRequest(DiscoverySettings discoverySettings)
     {
         [Required]
-        public IDiscoverySettings TasteProfile { get; init; } = tasteProfile;
-
-        [Required]
-        public MediaType SelectedMediaType { get; init; } = selectedMediaType;
-        [Required]
-        public 
+        public DiscoverySettings DiscoverySettings { get; init; } = discoverySettings;
     }
 }

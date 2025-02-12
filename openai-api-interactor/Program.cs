@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
     // the dev tools.
 
     // having a / on the end of the url breaks it. lmaooo
-    policy => policy.WithOrigins("http://localhost:5173")
+    policy => policy.WithOrigins("http://localhost:5175")
         .AllowAnyHeader() 
         .AllowAnyMethod());
 });
