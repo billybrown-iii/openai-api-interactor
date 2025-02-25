@@ -1,9 +1,33 @@
 ﻿using openai_api_interactor.Models;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Numerics;
 
 namespace openai_api_interactor.Services
 {
     public class PromptBuilder
     {
+            public string FromDiscoverySettings (DiscoverySettings settings)
+            {
+                string prompt = $"Hey, I'm looking for some {settings.MediaType} recommendations.\n\n";
+
+                if (!string.IsNullOrWhiteSpace(settings.Genre))
+                {
+                    prompt += $"Genre: {settings.Genre}\n\n";
+                }
+
+                if (!string.IsNullOrWhiteSpace(settings.Qualities))
+                {
+                    prompt += $"Here are keywords and/or characteristics I'm looking for in my recommendations:\n\n{settings.Qualities}\n\n";
+                }
+
+                prompt += $"Please give me four recommendations with title and synopsis.\n\n";
+                prompt += "Your synopsis should include a concise and straightforward summary of the plot elements.  It should NOT include any language that sounds like advertising.\n\n";
+                prompt += "Your reply should consist solely of a JSON collection of four objects, each with a title property and a synopsis property.  Please do not include any text outside of the JSON.";
+
+                return prompt;
+            }
+            
 //        public string FromTasteProfile (DiscoverySettings tasteProfile, string selectedMediaType)
 //        {
 

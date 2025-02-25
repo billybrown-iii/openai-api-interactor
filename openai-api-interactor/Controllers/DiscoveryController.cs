@@ -32,35 +32,39 @@ namespace openai_api_interactor.Controllers
         // TODO return IActionResult and an Ok() 
         async public Task<object> Post([FromBody] DiscoveryRequest discoveryRequest)
         {
-            Console.WriteLine("Hi!");
+            //Console.WriteLine("Hi!");
             Console.WriteLine(JsonSerializer.Serialize(discoveryRequest));
 
             //// todo validate the request
-            //DiscoverySettings discoverySettings = discoveryRequest.DiscoverySettings;
+            DiscoverySettings discoverySettings = discoveryRequest.DiscoverySettings;
 
-            //Console.WriteLine(JsonSerializer.Serialize(discoverySettings));
+            Console.WriteLine(JsonSerializer.Serialize(discoverySettings));
 
             //string selectedMediaType = discoveryRequest.SelectedMediaType.ToString().ToLower();  // ex: book
 
-            //string prompt = _promptBuilder.FromTasteProfile(tasteProfile, selectedMediaType);
+            string prompt = _promptBuilder.FromDiscoverySettings(discoverySettings);
+
+            Console.WriteLine(prompt);
 
             //ChatMessage myMessage = new SystemChatMessage(prompt);
             //ChatCompletion completion = await _chatClient.CompleteChatAsync([myMessage]);
 
-            //ChatCompletion completion = await _chatClient.CompleteChatAsync(prompt);
+            ChatCompletion completion = await _chatClient.CompleteChatAsync(prompt);
 
             // TODO validate the chat completion's contents
 
             // later:  look into structured outputs
             // and maybe more advanced things on top of that, like structured inputs or context loading or continued reinforcement learning.
 
-            //string content = completion.ToString();
+            string content = completion.ToString();
+
+            content = content.Replace("json", "").Replace("```", "").Trim();
 
             //Console.WriteLine(content);
 
             // should I return something besides an anon object?  like a class instance or something that conforms to a response interface?
-            //var testObj = new { content };
-            var testObj = new { };
+            var testObj = new { content };
+            //var testObj = new { };
             return testObj;
         }
     }
